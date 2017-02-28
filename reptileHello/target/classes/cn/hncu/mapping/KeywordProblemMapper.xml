@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hncu.dao.KeywordProblemMapper" >
+  <resultMap id="BaseResultMap" type="cn.hncu.model.KeywordProblemKey" >
+    <id column="keyword_id" property="keywordId" jdbcType="VARCHAR" />
+    <id column="problem_id" property="problemId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="cn.hncu.model.KeywordProblemKey" >
+    delete from keyword_problem
+    where keyword_id = #{keywordId,jdbcType=VARCHAR}
+      and problem_id = #{problemId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.hncu.model.KeywordProblemKey" >
+    insert into keyword_problem (keyword_id, problem_id)
+    values (#{keywordId,jdbcType=VARCHAR}, #{problemId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hncu.model.KeywordProblemKey" >
+    insert into keyword_problem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keywordId != null" >
+        keyword_id,
+      </if>
+      <if test="problemId != null" >
+        problem_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keywordId != null" >
+        #{keywordId,jdbcType=VARCHAR},
+      </if>
+      <if test="problemId != null" >
+        #{problemId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hncu.dao.ProblemMapper" >
+  <resultMap id="BaseResultMap" type="cn.hncu.model.Problem" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="problem" property="problem" jdbcType="VARCHAR" />
+    <result column="problem_anthor" property="problemAnthor" jdbcType="VARCHAR" />
+    <result column="quiz_time" property="quizTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.hncu.model.Problem" extends="BaseResultMap" >
+    <result column="problem_describe" property="problemDescribe" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, problem, problem_anthor, quiz_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    problem_describe
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from problem
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from problem
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.hncu.model.Problem" >
+    insert into problem (id, problem, problem_anthor, 
+      quiz_time, problem_describe)
+    values (#{id,jdbcType=VARCHAR}, #{problem,jdbcType=VARCHAR}, #{problemAnthor,jdbcType=VARCHAR}, 
+      #{quizTime,jdbcType=VARCHAR}, #{problemDescribe,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hncu.model.Problem" >
+    insert into problem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="problem != null" >
+        problem,
+      </if>
+      <if test="problemAnthor != null" >
+        problem_anthor,
+      </if>
+      <if test="quizTime != null" >
+        quiz_time,
+      </if>
+      <if test="problemDescribe != null" >
+        problem_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="problem != null" >
+        #{problem,jdbcType=VARCHAR},
+      </if>
+      <if test="problemAnthor != null" >
+        #{problemAnthor,jdbcType=VARCHAR},
+      </if>
+      <if test="quizTime != null" >
+        #{quizTime,jdbcType=VARCHAR},
+      </if>
+      <if test="problemDescribe != null" >
+        #{problemDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hncu.model.Problem" >
+    update problem
+    <set >
+      <if test="problem != null" >
+        problem = #{problem,jdbcType=VARCHAR},
+      </if>
+      <if test="problemAnthor != null" >
+        problem_anthor = #{problemAnthor,jdbcType=VARCHAR},
+      </if>
+      <if test="quizTime != null" >
+        quiz_time = #{quizTime,jdbcType=VARCHAR},
+      </if>
+      <if test="problemDescribe != null" >
+        problem_describe = #{problemDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.hncu.model.Problem" >
+    update problem
+    set problem = #{problem,jdbcType=VARCHAR},
+      problem_anthor = #{problemAnthor,jdbcType=VARCHAR},
+      quiz_time = #{quizTime,jdbcType=VARCHAR},
+      problem_describe = #{problemDescribe,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hncu.model.Problem" >
+    update problem
+    set problem = #{problem,jdbcType=VARCHAR},
+      problem_anthor = #{problemAnthor,jdbcType=VARCHAR},
+      quiz_time = #{quizTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

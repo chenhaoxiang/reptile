@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hncu.dao.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="cn.hncu.model.Answer" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="problem_id" property="problemId" jdbcType="VARCHAR" />
+    <result column="answer_time" property="answerTime" jdbcType="VARCHAR" />
+    <result column="answer_anthor" property="answerAnthor" jdbcType="VARCHAR" />
+    <result column="anthor_grade" property="anthorGrade" jdbcType="VARCHAR" />
+    <result column="point_praise" property="pointPraise" jdbcType="VARCHAR" />
+    <result column="contempt_number" property="contemptNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.hncu.model.Answer" extends="BaseResultMap" >
+    <result column="answer" property="answer" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, problem_id, answer_time, answer_anthor, anthor_grade, point_praise, contempt_number
+  </sql>
+  <sql id="Blob_Column_List" >
+    answer
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from answer
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from answer
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.hncu.model.Answer" >
+    insert into answer (id, problem_id, answer_time, 
+      answer_anthor, anthor_grade, point_praise, 
+      contempt_number, answer)
+    values (#{id,jdbcType=VARCHAR}, #{problemId,jdbcType=VARCHAR}, #{answerTime,jdbcType=VARCHAR}, 
+      #{answerAnthor,jdbcType=VARCHAR}, #{anthorGrade,jdbcType=VARCHAR}, #{pointPraise,jdbcType=VARCHAR}, 
+      #{contemptNumber,jdbcType=VARCHAR}, #{answer,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hncu.model.Answer" >
+    insert into answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="problemId != null" >
+        problem_id,
+      </if>
+      <if test="answerTime != null" >
+        answer_time,
+      </if>
+      <if test="answerAnthor != null" >
+        answer_anthor,
+      </if>
+      <if test="anthorGrade != null" >
+        anthor_grade,
+      </if>
+      <if test="pointPraise != null" >
+        point_praise,
+      </if>
+      <if test="contemptNumber != null" >
+        contempt_number,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="problemId != null" >
+        #{problemId,jdbcType=VARCHAR},
+      </if>
+      <if test="answerTime != null" >
+        #{answerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="answerAnthor != null" >
+        #{answerAnthor,jdbcType=VARCHAR},
+      </if>
+      <if test="anthorGrade != null" >
+        #{anthorGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="pointPraise != null" >
+        #{pointPraise,jdbcType=VARCHAR},
+      </if>
+      <if test="contemptNumber != null" >
+        #{contemptNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hncu.model.Answer" >
+    update answer
+    <set >
+      <if test="problemId != null" >
+        problem_id = #{problemId,jdbcType=VARCHAR},
+      </if>
+      <if test="answerTime != null" >
+        answer_time = #{answerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="answerAnthor != null" >
+        answer_anthor = #{answerAnthor,jdbcType=VARCHAR},
+      </if>
+      <if test="anthorGrade != null" >
+        anthor_grade = #{anthorGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="pointPraise != null" >
+        point_praise = #{pointPraise,jdbcType=VARCHAR},
+      </if>
+      <if test="contemptNumber != null" >
+        contempt_number = #{contemptNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.hncu.model.Answer" >
+    update answer
+    set problem_id = #{problemId,jdbcType=VARCHAR},
+      answer_time = #{answerTime,jdbcType=VARCHAR},
+      answer_anthor = #{answerAnthor,jdbcType=VARCHAR},
+      anthor_grade = #{anthorGrade,jdbcType=VARCHAR},
+      point_praise = #{pointPraise,jdbcType=VARCHAR},
+      contempt_number = #{contemptNumber,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hncu.model.Answer" >
+    update answer
+    set problem_id = #{problemId,jdbcType=VARCHAR},
+      answer_time = #{answerTime,jdbcType=VARCHAR},
+      answer_anthor = #{answerAnthor,jdbcType=VARCHAR},
+      anthor_grade = #{anthorGrade,jdbcType=VARCHAR},
+      point_praise = #{pointPraise,jdbcType=VARCHAR},
+      contempt_number = #{contemptNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
