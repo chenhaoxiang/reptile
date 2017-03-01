@@ -1,5 +1,4 @@
-﻿
-简单的通过关键字，爬出百度知道的一些搜索数据。
+﻿简单的通过关键字，爬出百度知道的一些搜索数据。
 例如：问题，提问时间；答案文本，答案时间，点赞数，拍砖数，回答人，回答人级别，搜索的关键字等。
 
 答案可以有多个，每个问题有多个答案应都保存。保存数据在MySql中。
@@ -389,3 +388,9 @@ public class Entrance implements PageProcessor {
 }
 
 ```
+
+数据库很简单，看你自己需要哪些数据，就建立哪些字段和表就行。
+
+![](http://img.blog.csdn.net/20170228210533716?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY1MjUyMTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+建立MySQL数据表的文件在项目的src/main/resources/sql/1.sql
